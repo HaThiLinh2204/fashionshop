@@ -1,86 +1,83 @@
 package com.gr2.fashionshop.service.impl;
 
+import com.gr2.fashionshop.domain.Category;
 import com.gr2.fashionshop.domain.Product;
+import com.gr2.fashionshop.exceptions.CategoryNotFoundException;
+import com.gr2.fashionshop.exceptions.ProductNotFoundException;
 import com.gr2.fashionshop.repository.ProductRepository;
 import com.gr2.fashionshop.service.ProductService;
 import com.gr2.fashionshop.service.dto.ProductDTO;
-import com.gr2.fashionshop.service.mapper.ProductMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-/**
- * Service Implementation for managing {@link Product}.
- */
 @Service
-@Transactional
 public class ProductServiceImpl implements ProductService {
+  @Autowired
+  private ProductRepository productRepository;
 
-    private final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
-
-    private final ProductRepository productRepository;
-
-    private final ProductMapper productMapper;
-
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
+  @Override
+  public Product addProduct(Product product){
+    Optional<Product> product1 = productRepository.findById(product.getProduct_id());
+    if(!product1.isPresent()) {
+      Product product2 = productRepository.save(product);
+      return product2;
     }
-
-    @Override
-    public ProductDTO save(ProductDTO productDTO) {
-        log.debug("Request to save Product : {}", productDTO);
-        Product product = productMapper.toEntity(productDTO);
-        product = productRepository.save(product);
-        return productMapper.toDto(product);
+    else
+      throw new ProductNotFoundException("Product already exists");
+  };
+  @Override
+  public Product getProductById(String id) throws ProductNotFoundException {
+    Optional<Product> product = productRepository.findById(id);
+    if (product.isPresent()){
+      return product.get();
     }
-
-    @Override
-    public ProductDTO update(ProductDTO productDTO) {
-        log.debug("Request to update Product : {}", productDTO);
-        Product product = productMapper.toEntity(productDTO);
-        product.setIsPersisted();
-        product = productRepository.save(product);
-        return productMapper.toDto(product);
+    else
+      throw new ProductNotFoundException("Product not found with given id");
+  };
+  @Override
+  public String deleteProduct(String id) throws ProductNotFoundException{
+    Optional<Product> product = productRepository.findById(id);
+    if(product.isPresent()){
+      Product product1 = product.get();
+      System.out.println(product1);
+      productRepository.delete(product1);
+      return "Product deleted by id" ;
     }
-
-    @Override
-    public Optional<ProductDTO> partialUpdate(ProductDTO productDTO) {
-        log.debug("Request to partially update Product : {}", productDTO);
-
-        return productRepository
-            .findById(productDTO.getId())
-            .map(existingProduct -> {
-                productMapper.partialUpdate(existingProduct, productDTO);
-
-                return existingProduct;
-            })
-            .map(productRepository::save)
-            .map(productMapper::toDto);
+    else
+      throw  new ProductNotFoundException("Product not found with given id");
+  };
+  @Override
+  public Product updateProduct(Product product)throws ProductNotFoundException{
+    Optional<Product> product1 = productRepository.findById(product.getProduct_id());
+    if(product1.isPresent()){
+      product1.get();
+      Product product2 = productRepository.save(product);
+      return product2;
     }
+    else
+      throw  new ProductNotFoundException("Product not found with given id");
 
-    @Override
-    @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Products");
-        return productRepository.findAll(pageable).map(productMapper::toDto);
-    }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<ProductDTO> findOne(String id) {
-        log.debug("Request to get Product : {}", id);
-        return productRepository.findById(id).map(productMapper::toDto);
+  };
+  @Override
+  public List<ProductDTO> getProductsOfCategory(Category category){
+    List<ProductDTO> list = productRepository.getAllProductsInACategory(category);
+    if (list.size() > 0){
+      return list;
     }
+    else
+      throw new CategoryNotFoundException("No products found with category:" + category);
+  };
 
-    @Override
-    public void delete(String id) {
-        log.debug("Request to delete Product : {}", id);
-        productRepository.deleteById(id);
+  @Override
+  public List<Product> getAllProducts(){
+    List<Product> list = productRepository.findAll();
+    if(list.size() > 0){
+      return list;
     }
+    else
+      throw new ProductNotFoundException("No products found");
+  }
 }

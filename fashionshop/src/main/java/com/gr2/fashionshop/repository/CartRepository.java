@@ -1,13 +1,11 @@
 package com.gr2.fashionshop.repository;
 
 import com.gr2.fashionshop.domain.Cart;
-import com.gr2.fashionshop.domain.CartItem;
-import com.gr2.fashionshop.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 @Repository
-public interface CartItemRepository extends JpaRepository<CartItem,Integer> {
-
+public interface CartRepository extends JpaRepository<Cart,String> {
+    Optional<Cart> findByUserId(Integer userId);
 }

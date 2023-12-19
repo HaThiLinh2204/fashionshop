@@ -1,66 +1,32 @@
 package com.gr2.fashionshop.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
 @Entity
+@Data
+@Table(name="cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+
+    @Column(name = "product_id")
+    private String productId;
+
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @Column(name = "price")
+    private Double price;
 
+    @Column(name = "quantity")
     private int quantity;
 
-    public CartItem() {
-
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    @Column(name = "sub_price")
+    private Double subPrice;
 
 
 
-    public String getId() {
-        return id;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-
-
-
-    public CartItem(String id, Cart cart, Product product, int quantity) {
-        this.id = id;
-        this.cart = cart;
-        this.product = product;
-        this.quantity = quantity;
-    }
 }

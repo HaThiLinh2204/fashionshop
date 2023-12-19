@@ -1,59 +1,22 @@
 package com.gr2.fashionshop.service;
 
+import com.gr2.fashionshop.domain.Category;
+import com.gr2.fashionshop.domain.Product;
 import com.gr2.fashionshop.service.dto.ProductDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import java.util.List;
 
 /**
  * Service Interface for managing {@link com.gr2.fashionshop.domain.Product}.
  */
+
 public interface ProductService {
-    /**
-     * Save a product.
-     *
-     * @param productDTO the entity to save.
-     * @return the persisted entity.
-     */
-    ProductDTO save(ProductDTO productDTO);
+    public Product addProduct(Product product);
+    public Product getProductById(String id);
 
-    /**
-     * Updates a product.
-     *
-     * @param productDTO the entity to update.
-     * @return the persisted entity.
-     */
-    ProductDTO update(ProductDTO productDTO);
+    public String deleteProduct(String id);
+    public Product updateProduct(Product product);
+    public List<ProductDTO> getProductsOfCategory(Category category);
 
-    /**
-     * Partially updates a product.
-     *
-     * @param productDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Optional<ProductDTO> partialUpdate(ProductDTO productDTO);
-
-    /**
-     * Get all the products.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Page<ProductDTO> findAll(Pageable pageable);
-
-    /**
-     * Get the "id" product.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Optional<ProductDTO> findOne(String id);
-
-    /**
-     * Delete the "id" product.
-     *
-     * @param id the id of the entity.
-     */
-    void delete(String id);
+    public List<Product> getAllProducts();
 }

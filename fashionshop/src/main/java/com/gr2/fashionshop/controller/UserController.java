@@ -1,10 +1,10 @@
 package com.gr2.fashionshop.controller;
 
 import com.gr2.fashionshop.service.UserService;
-import com.gr2.fashionshop.service.dto.ResponseDTO;
 import com.gr2.fashionshop.service.dto.user.SignInDTO;
 import com.gr2.fashionshop.service.dto.user.SignInReponseDTO;
 import com.gr2.fashionshop.service.dto.user.SignUpDTO;
+import com.gr2.fashionshop.service.dto.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
