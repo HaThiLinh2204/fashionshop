@@ -1,5 +1,6 @@
 package com.gr2.fashionshop.service.dto;
 
+import com.gr2.fashionshop.domain.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -19,5 +20,6 @@ public class ProductDTO implements Serializable {
     private String description;
 
     private Double price;
+
 
 }

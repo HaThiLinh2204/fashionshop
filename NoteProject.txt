@@ -1,0 +1,29 @@
+Trong dự án Java Spring Boot của bạn, mỗi file có một nhiệm vụ cụ thể và liên quan đến việc quản lý và tương tác với đối tượng Product và dịch vụ liên quan. Dưới đây là mô tả cho mỗi file trong dự án của bạn:
+
+Product.java: Đây là lớp đại diện cho đối tượng sản phẩm. Nó là một thực thể được ánh xạ vào một bảng trong cơ sở dữ liệu thông qua JPA. 
+Các trường và phương thức trong lớp này đại diện cho các thuộc tính và hành vi của sản phẩm.
+
+ProductRepository.java: Đây là một giao diện mở rộng từ JpaRepository và JpaSpecificationExecutor.
+ Nó cung cấp các phương thức để thao tác với cơ sở dữ liệu liên quan đến sản phẩm.
+ Repository này làm cho việc truy xuất và cập nhật dữ liệu liên quan đến sản phẩm dễ dàng hơn.
+
+ProductCriteria.java: Lớp này đại diện cho các tiêu chí tìm kiếm sản phẩm.
+ Nó được sử dụng để xác định các điều kiện tìm kiếm khi bạn muốn truy xuất sản phẩm từ cơ sở dữ liệu. 
+Nó bao gồm các thuộc tính như tên, giá, số lượng, màu sắc, và các tiêu chí khác.
+
+ProductService.java: Giao diện này định nghĩa các phương thức dịch vụ liên quan đến sản phẩm, chẳng hạn như lưu, cập nhật, xóa và truy vấn sản phẩm.
+ Các phương thức này được triển khai trong ProductServiceImpl.
+
+ProductQueryService.java: Lớp này cung cấp các phương thức để thực hiện truy vấn liên quan đến sản phẩm dựa trên các tiêu chí tìm kiếm. 
+Nó sử dụng các tiêu chí từ ProductCriteria để xác định các truy vấn và trả về kết quả.
+
+ProductDTO.java: Đây là lớp DTO (Data Transfer Object) đại diện cho sản phẩm. 
+Nó được sử dụng để truyền dữ liệu giữa tầng giao diện người dùng và tầng dịch vụ. Nó chứa các trường tương tự như Product, 
+nhưng thường không có các thông tin liên quan đến cơ sở dữ liệu như khóa chính.
+
+ProductResource.java: Đây là lớp điều khiển (Controller) xử lý các yêu cầu liên quan đến sản phẩm từ phía người dùng.
+ Nó nhận các yêu cầu HTTP và gọi các phương thức tương ứng trong ProductService và ProductQueryService để thực hiện các thao tác CRUD (Create, Read, Update, Delete).
+
+ProductMapper.java: Lớp này làm nhiệm vụ ánh xạ dữ liệu giữa Product và ProductDTO. Nó sử dụng thư viện MapStruct để thực hiện việc ánh xạ.
+
+Mỗi lớp và giao diện trong dự án có mục tiêu cụ thể và giúp bạn quản lý, truy vấn và tương tác với dữ liệu sản phẩm một cách hiệu quả trong ứng dụng của bạn.
