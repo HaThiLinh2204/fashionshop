@@ -81,14 +81,14 @@ public class UserService {
         }
 
         // hash the password
-
-        try {
-            if (!user.getPasswoprd().equals(hashPassword(signInDTO.getPassword()))) {
-                throw new AuthenticationFailException("wrong password");
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+//            if (!user.getPasswoprd().equals(hashPassword(signInDTO.getPassword()))) {
+//                throw new AuthenticationFailException("wrong password");
+//            }
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
 
         // compare the password in DB
 

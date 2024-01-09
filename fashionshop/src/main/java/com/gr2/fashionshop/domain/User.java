@@ -1,7 +1,15 @@
 package com.gr2.fashionshop.domain;
 
 import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,53 +29,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public String getId() {
-        return id;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswoprd() {
-        return password;
-    }
-
-    public void setPasswoprd(String passwoprd) {
-        this.password = passwoprd;
-    }
-
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User() {
+    public User(String firstName, String lastName, String email, String encryptedpassword) {
     }
 }

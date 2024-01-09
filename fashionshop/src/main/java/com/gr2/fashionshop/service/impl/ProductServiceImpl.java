@@ -4,6 +4,7 @@ import com.gr2.fashionshop.domain.Category;
 import com.gr2.fashionshop.domain.Product;
 import com.gr2.fashionshop.exceptions.CategoryNotFoundException;
 import com.gr2.fashionshop.exceptions.ProductNotFoundException;
+import com.gr2.fashionshop.repository.ProductImageRepository;
 import com.gr2.fashionshop.repository.ProductRepository;
 import com.gr2.fashionshop.service.ProductService;
 import com.gr2.fashionshop.service.dto.ProductDTO;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
   @Autowired
   private ProductRepository productRepository;
+  private ProductImageRepository productImageRepository;
 
   @Override
   public Product addProduct(Product product){
@@ -46,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
       return "Product deleted by id" ;
     }
     else
-      throw  new ProductNotFoundException("Product not found with given id");
+      throw new ProductNotFoundException("Product not found with given id");
   };
   @Override
   public Product updateProduct(Product product)throws ProductNotFoundException{
