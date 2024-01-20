@@ -11,8 +11,12 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ProductImageRepository extends JpaRepository<ProductImage, String> {
+
   @Query("select new com.gr2.fashionshop.service.dto.ProductImageDTO(i.imageId, i.imageUrl) " +
-      "from ProductImage i where i.product.product_id = :productId")
+      "from ProductImage i where i.productId = :productId")
   public List<ProductImageDTO> getAllPoductImagesByProductId(@Param("productId") String productId);
 
+  List<ProductImage> findByProductId(String productId);
+
+  void deleteByProductId(String productId);
 }

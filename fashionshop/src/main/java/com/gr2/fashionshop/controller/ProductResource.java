@@ -18,42 +18,49 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 public class ProductResource {
+
   @Autowired
   private final ProductService productService;
 
   @PostMapping("/products")
-  public ResponseEntity<Product> addProduct(@RequestBody Product product){
+  public ResponseEntity<Product> addProduct(@RequestBody Product product) {
     Product product1 = productService.addProduct(product);
     return new ResponseEntity<Product>(product1, HttpStatus.CREATED);
   }
 
   @GetMapping("/product/{id}")
-  public ResponseEntity<Product> getProductFromCatalogById(@PathVariable("id") String id){
+  public ResponseEntity<Product> getProductFromCatalogById(@PathVariable("id") String id) {
     Product prod = productService.getProductById(id);
     return new ResponseEntity<Product>(prod, HttpStatus.FOUND);
   }
 
   @DeleteMapping("/product/{id}")
-  public ResponseEntity<String> deleteProductFromCatalogById (@PathVariable("id") String id){
+  public ResponseEntity<String> deleteProductFromCatalogById(@PathVariable("id") String id) {
     String res = productService.deleteProduct(id);
     return new ResponseEntity<String>(res, HttpStatus.OK);
   }
+//  @DeleteMapping("/{productId}")
+//  public ResponseEntity<String> deleteProduct(@PathVariable String productId) {
+//    productService.deleteProductAndRelatedData(productId);
+//    return new ResponseEntity<>("Product and related data deleted successfully", HttpStatus.OK);
+//  }
 
   @PutMapping("products")
-  public ResponseEntity<Product> updateProductInCatalog(@Valid @RequestBody Product product){
+  public ResponseEntity<Product> updateProductInCatalog(@Valid @RequestBody Product product) {
     Product product1 = productService.updateProduct(product);
     return new ResponseEntity<Product>(product1, HttpStatus.OK);
   }
 
   @GetMapping("products/{category}")
-  public ResponseEntity<List<ProductDTO>> getAllProductsInCategory(@PathVariable("category") String category){
+  public ResponseEntity<List<ProductDTO>> getAllProductsInCategory(
+      @PathVariable("category") String category) {
     Category category1 = Category.valueOf(category.toUpperCase());
     List<ProductDTO> list = productService.getProductsOfCategory(category1);
     return new ResponseEntity<List<ProductDTO>>(list, HttpStatus.OK);
   }
 
   @GetMapping("products")
-  public  ResponseEntity<List<Product>> getAllProducts(){
+  public ResponseEntity<List<Product>> getAllProducts() {
     List<Product> list = productService.getAllProducts();
     return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
   }

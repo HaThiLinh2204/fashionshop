@@ -19,21 +19,23 @@ public class ProductImageServiceImpl implements ProductImageService {
 
   @Override
   public ProductImage addProductImage(ProductImage productImage) {
-    Optional<ProductImage> productImage1 = productImageRepository.findById(productImage.getImageId());
-    if(!productImage1.isPresent()){
+    Optional<ProductImage> productImage1 = productImageRepository.findById(
+        productImage.getImageId());
+    if (!productImage1.isPresent()) {
+      //productImage1.get();
       ProductImage productImage2 = productImageRepository.save(productImage);
       return productImage2;
-    }
-    else
+    } else {
       throw new ImageNotFoundException("Image already exists");
+    }
   }
 
   @Override
   public List<ProductImageDTO> getAllProductImagesByProductId(String productId) {
     List<ProductImageDTO> list = productImageRepository.getAllPoductImagesByProductId(productId);
-    if (list.size() > 0)
+    if (list.size() > 0) {
       return list;
-    else {
+    } else {
       throw new ProductNotFoundException("No products found");
     }
   }
@@ -41,12 +43,19 @@ public class ProductImageServiceImpl implements ProductImageService {
   @Override
   public String deleteProductImage(String id) {
     Optional<ProductImage> productImage = productImageRepository.findById(id);
-    if(productImage.isPresent()){
+    if (productImage.isPresent()) {
       ProductImage productImage1 = productImage.get();
       productImageRepository.delete(productImage1);
+
       return "Deleted successfully";
-    }
-    else
+    } else {
       return "Delete fails";
+    }
+  }
+
+  @Override
+  public void deleteProductImagesByProductId(String productId) {
+    List<ProductImage> images = productImageRepository.findByProductId(productId);
+    productImageRepository.deleteAll(images);
   }
 }

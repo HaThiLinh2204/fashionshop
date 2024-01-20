@@ -12,4 +12,5 @@ public interface ProductImageService {
 
   public String deleteProductImage(String id);
 
+  public void deleteProductImagesByProductId(String productId);
 }
