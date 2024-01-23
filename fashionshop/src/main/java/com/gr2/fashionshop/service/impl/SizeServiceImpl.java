@@ -55,4 +55,15 @@ public class SizeServiceImpl implements SizeService {
       throw new ProductNotFoundException("No products found");
     }
   }
+
+  @Override
+  public Size getSizeById(String id) {
+    Optional<Size> size = sizeRepository.findById(id);
+    if (size.isPresent()) {
+      Size size1 = size.get();
+      return size1;
+    } else {
+      throw new SizeNotFoundException("Size product already exists");
+    }
+  }
 }

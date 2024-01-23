@@ -1,11 +1,15 @@
 package com.gr2.fashionshop.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "carts")
@@ -14,16 +18,10 @@ public class Cart {
   @Id
   @GeneratedValue(generator = "UUID")
   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-  private String id;
+  private String cartId;
 
-  @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(cascade = CascadeType.ALL)
   private List<CartItem> cartItems = new ArrayList<>();
 
-  @Column(name = "user_id")
-  private String userId;
-
-  @Column(name = "total_price")
-  private Double totalPrice;
-
-
+  private Double cartTotal;
 }

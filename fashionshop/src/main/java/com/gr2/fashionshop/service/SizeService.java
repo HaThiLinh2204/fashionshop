@@ -14,4 +14,6 @@ public interface SizeService {
 
   public List<SizeDTO> getAllSizeByProductId(String productId);
 
+  public Size getSizeById(String id);
+
 }

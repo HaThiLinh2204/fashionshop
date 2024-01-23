@@ -12,12 +12,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-//@AllArgsConstructor
-//@NoArgsConstructor
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class CartDTO {
-   private String id;
-   private  String userId;
-   private Double totalPrice;
-   private  List<CartItemDTO> cartItems;
+
+  private String id;
+  private List<CartItemDTO> cartItems;
+  private double totalPrice;
 }
