@@ -23,18 +23,21 @@ public class ProductResource {
   private final ProductService productService;
 
   @PostMapping("/products")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Product> addProduct(@RequestBody Product product) {
     Product product1 = productService.addProduct(product);
     return new ResponseEntity<Product>(product1, HttpStatus.CREATED);
   }
 
   @GetMapping("/product/{id}")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Product> getProductFromCatalogById(@PathVariable("id") String id) {
     Product prod = productService.getProductById(id);
     return new ResponseEntity<Product>(prod, HttpStatus.FOUND);
   }
 
   @DeleteMapping("/product/{id}")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<String> deleteProductFromCatalogById(@PathVariable("id") String id) {
     String res = productService.deleteProduct(id);
     return new ResponseEntity<String>(res, HttpStatus.OK);
@@ -46,12 +49,14 @@ public class ProductResource {
 //  }
 
   @PutMapping("products")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Product> updateProductInCatalog(@Valid @RequestBody Product product) {
     Product product1 = productService.updateProduct(product);
     return new ResponseEntity<Product>(product1, HttpStatus.OK);
   }
 
   @GetMapping("products/{category}")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<List<ProductDTO>> getAllProductsInCategory(
       @PathVariable("category") String category) {
     Category category1 = Category.valueOf(category.toUpperCase());
@@ -60,6 +65,7 @@ public class ProductResource {
   }
 
   @GetMapping("products")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<List<Product>> getAllProducts() {
     List<Product> list = productService.getAllProducts();
     return new ResponseEntity<List<Product>>(list, HttpStatus.OK);

@@ -15,7 +15,9 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
-  @Query("select new com.gr2.fashionshop.service.dto.ProductDTO(p.name,p.description,p.price) "
-      + "from Product p where p.category=:catenum")
+
+  @Query(
+      "select new com.gr2.fashionshop.service.dto.ProductDTO(p.product_id,p.name,p.description,p.price) "
+          + "from Product p where p.category=:catenum")
   public List<ProductDTO> getAllProductsInACategory(@Param("catenum") Category catenum);
 }

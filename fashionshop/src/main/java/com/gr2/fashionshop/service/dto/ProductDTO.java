@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductDTO implements Serializable {
 
+    private String product_id;
+
     private String name;
 
     private String description;

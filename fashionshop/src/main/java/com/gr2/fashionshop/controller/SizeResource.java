@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +24,14 @@ public class SizeResource {
   private final SizeService sizeService;
 
   @PostMapping("/product/size")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Size> addSize(@RequestBody Size size) {
     Size size1 = sizeService.addSize(size);
     return new ResponseEntity<Size>(size1, HttpStatus.CREATED);
   }
 
   @GetMapping("product/size/{productId}")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<List<SizeDTO>> getAllSizeByProductId(
       @PathVariable("productId") String productId) {
     List<SizeDTO> list = sizeService.getAllSizeByProductId(productId);
@@ -36,6 +39,7 @@ public class SizeResource {
   }
 
   @DeleteMapping("/product/size/{sizeId}")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<String> deleteSize(@PathVariable("sizeId") String sizeId) {
     String res = sizeService.deleteSize(sizeId);
     return new ResponseEntity<String>(res, HttpStatus.OK);

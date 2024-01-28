@@ -9,6 +9,7 @@ import com.gr2.fashionshop.service.SizeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +31,14 @@ public class CartResource {
   private final SizeService sizeService;
 
   @GetMapping
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Cart> getCart() {
 
     return ResponseEntity.ok(cartService.getCart());
   }
 
   @PostMapping("/add")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<String> addToCart(@RequestParam String productId,
       @RequestParam String sizeId,
       @RequestParam int quantity) {
@@ -51,12 +54,14 @@ public class CartResource {
   }
 
   @PostMapping("/remove")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<String> removeCartItem(@RequestParam String cartItemId) {
     cartService.removeCartItem(cartItemId);
     return ResponseEntity.ok("CartItem removed from cart successfully.");
   }
 
   @PostMapping("/clear")
+  @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<String> clearCart() {
     cartService.clearCart();
     return ResponseEntity.ok("Cart cleared successfully.");
