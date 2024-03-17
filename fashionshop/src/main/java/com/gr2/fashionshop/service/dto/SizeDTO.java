@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SizeDTO implements Serializable {
 
+  private String sizeId;
   private String sizeName;
-
   private int quantity;
 }

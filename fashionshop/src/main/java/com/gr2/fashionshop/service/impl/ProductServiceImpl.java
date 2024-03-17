@@ -2,16 +2,15 @@ package com.gr2.fashionshop.service.impl;
 
 import com.gr2.fashionshop.domain.Category;
 import com.gr2.fashionshop.domain.Product;
+import com.gr2.fashionshop.domain.Size;
 import com.gr2.fashionshop.exceptions.CategoryNotFoundException;
 import com.gr2.fashionshop.exceptions.ProductNotFoundException;
-import com.gr2.fashionshop.repository.ProductImageRepository;
 import com.gr2.fashionshop.repository.ProductRepository;
 import com.gr2.fashionshop.repository.SizeRepository;
 import com.gr2.fashionshop.service.ProductImageService;
 import com.gr2.fashionshop.service.ProductService;
 import com.gr2.fashionshop.service.SizeService;
 import com.gr2.fashionshop.service.dto.ProductDTO;
-import java.awt.Image;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,9 @@ public class ProductServiceImpl implements ProductService {
 
   @Autowired
   private SizeService sizeService;
+
+  @Autowired
+  private SizeRepository sizeRepository;
 
   @Override
   public Product addProduct(Product product) {
@@ -56,7 +58,6 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public String deleteProduct(String productId) throws ProductNotFoundException {
     Optional<Product> product = productRepository.findById(productId);
-    //   Optional<Image> image = productImageRepository.findAllById(productId);
     if (product.isPresent()) {
       Product product1 = product.get();
       System.out.println(product1);
@@ -81,8 +82,6 @@ public class ProductServiceImpl implements ProductService {
     } else {
       throw new ProductNotFoundException("Product not found with given id");
     }
-
-
   }
 
   ;
@@ -108,4 +107,15 @@ public class ProductServiceImpl implements ProductService {
       throw new ProductNotFoundException("No products found");
     }
   }
+
+  @Override
+  public int getTotalQuantityOfProduct(String productId) {
+    int totalQuantity = 0;
+    List<Size> sizes = sizeRepository.findByProductId(productId);
+    for (Size size : sizes) {
+      totalQuantity += size.getQuantity();
+    }
+    return totalQuantity;
+  }
+
 }

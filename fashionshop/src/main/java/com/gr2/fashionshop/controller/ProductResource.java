@@ -33,7 +33,7 @@ public class ProductResource {
   @CrossOrigin(origins = "http://localhost:3000")
   public ResponseEntity<Product> getProductFromCatalogById(@PathVariable("id") String id) {
     Product prod = productService.getProductById(id);
-    return new ResponseEntity<Product>(prod, HttpStatus.FOUND);
+    return new ResponseEntity<Product>(prod, HttpStatus.OK);
   }
 
   @DeleteMapping("/product/{id}")
@@ -42,11 +42,13 @@ public class ProductResource {
     String res = productService.deleteProduct(id);
     return new ResponseEntity<String>(res, HttpStatus.OK);
   }
-//  @DeleteMapping("/{productId}")
-//  public ResponseEntity<String> deleteProduct(@PathVariable String productId) {
-//    productService.deleteProductAndRelatedData(productId);
-//    return new ResponseEntity<>("Product and related data deleted successfully", HttpStatus.OK);
-//  }
+
+  @GetMapping("/product/{id}/total")
+  @CrossOrigin(origins = "http://localhost:3000")
+  public ResponseEntity<Integer> getTotalQuantity(@PathVariable("id") String productId) {
+    int totalQuantity = productService.getTotalQuantityOfProduct(productId);
+    return ResponseEntity.ok(totalQuantity);
+  }
 
   @PutMapping("products")
   @CrossOrigin(origins = "http://localhost:3000")

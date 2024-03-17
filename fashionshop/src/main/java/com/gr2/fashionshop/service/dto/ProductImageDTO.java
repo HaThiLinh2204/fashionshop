@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductImageDTO implements Serializable {
-  private String imageId;
-  private String imageUrl;
 
+  private String imageId;
+
+  private String imageUrl;
 }

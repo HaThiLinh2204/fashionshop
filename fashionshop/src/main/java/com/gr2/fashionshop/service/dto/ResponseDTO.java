@@ -1,27 +1,28 @@
 package com.gr2.fashionshop.service.dto;
 
 public class ResponseDTO {
-    private String status;
-    private String message;
 
-    public String getStatus() {
-        return status;
-    }
+  private String status;
+  private String message;
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  public String getStatus() {
+    return status;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public String getMessage() {
+    return message;
+  }
 
-    public ResponseDTO(String status, String message) {
-        this.status = status;
-        this.message = message;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public ResponseDTO(String status, String message) {
+    this.status = status;
+    this.message = message;
+  }
 }

@@ -12,14 +12,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SizeRepository extends JpaRepository<Size, String> {
 
-  @Query("select new com.gr2.fashionshop.service.dto.SizeDTO(s.sizeName, s.quantity) " +
+  @Query("select new com.gr2.fashionshop.service.dto.SizeDTO(s.sizeId, s.sizeName, s.quantity) " +
       "from Size s where s.productId = :productId")
   public List<SizeDTO> getAllSizesByProductId(@Param("productId") String productId);
 
   List<Size> findByProductId(String productId);
 
   void deleteByProductId(String productId);
-
-  //  @Query("select s from Size s where s.productId = :productId")
-  // public List<Size> getAllByProductId(@Param("productId") String productId);
 }
