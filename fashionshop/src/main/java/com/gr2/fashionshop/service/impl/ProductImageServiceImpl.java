@@ -36,7 +36,8 @@ public class ProductImageServiceImpl implements ProductImageService {
     if (list.size() > 0) {
       return list;
     } else {
-      throw new ProductNotFoundException("No products found");
+      return list;
+//      throw new ProductNotFoundException("No products found");
     }
   }
 

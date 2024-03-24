@@ -25,4 +25,7 @@ public interface ProductService {
   public List<Product> getAllProducts();
 
   public int getTotalQuantityOfProduct(String productId);
+
+  public long getTotalAllProduct();
+
 }

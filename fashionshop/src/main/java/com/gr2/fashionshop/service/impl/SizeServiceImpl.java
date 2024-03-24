@@ -8,6 +8,7 @@ import com.gr2.fashionshop.service.SizeService;
 import com.gr2.fashionshop.service.dto.SizeDTO;
 import java.util.List;
 import java.util.Optional;
+import javax.swing.JList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,8 @@ public class SizeServiceImpl implements SizeService {
     if (list.size() > 0) {
       return list;
     } else {
-      throw new ProductNotFoundException("No products found");
+//      throw new ProductNotFoundException("No products found");
+      return list;
     }
   }
 
@@ -63,7 +65,8 @@ public class SizeServiceImpl implements SizeService {
       Size size1 = size.get();
       return size1;
     } else {
-      throw new SizeNotFoundException("Size product already exists");
+      return null;
+      // throw new SizeNotFoundException("Size product already exists");
     }
   }
 }

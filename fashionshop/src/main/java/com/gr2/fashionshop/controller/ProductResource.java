@@ -73,4 +73,11 @@ public class ProductResource {
     return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
   }
 
+  @GetMapping("products/total")
+  @CrossOrigin(origins = "http://localhost:3000")
+  public ResponseEntity<Long> getTotalAllProducts() {
+    Long total = productService.getTotalAllProduct();
+    return new ResponseEntity<Long>(total, HttpStatus.OK);
+  }
+
 }

@@ -27,8 +27,9 @@ public class Product {
   @Id
   private String product_id;
 
+  @Column(columnDefinition = "longtext")
   @NotNull
-  @Size(min = 3, max = 30, message = "Product name size should be between 3-30")
+  @Size(min = 3, max = 255, message = "Product name size should be between 3-30")
   private String name;
 
   private String description;

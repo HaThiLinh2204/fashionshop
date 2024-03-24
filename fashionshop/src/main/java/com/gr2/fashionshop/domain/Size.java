@@ -34,7 +34,7 @@ public class Size {
   private String productId;
 
   @NotNull
-  @javax.validation.constraints.Size(min = 3, max = 30, message = "Size name size should be between 3-30")
+//  @javax.validation.constraints.Size(min = 3, max = 255, message = "Size name size should be between 3-30")
   private String sizeName;
 
   @NotNull

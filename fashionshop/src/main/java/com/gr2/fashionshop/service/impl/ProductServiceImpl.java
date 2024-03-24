@@ -109,6 +109,16 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  public long getTotalAllProduct() {
+    Long totlaAllProduct = productRepository.count();
+    if (totlaAllProduct > 0)
+      return totlaAllProduct;
+    else {
+      return 0;
+    }
+  }
+
+  @Override
   public int getTotalQuantityOfProduct(String productId) {
     int totalQuantity = 0;
     List<Size> sizes = sizeRepository.findByProductId(productId);
